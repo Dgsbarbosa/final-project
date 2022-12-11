@@ -5,18 +5,21 @@ from app import app
 
 status = True
 #Rotas
+@app.route("/index")
 @app.route("/")
 def index():
-    if status == False:
-        return render_template(
-        "home.html",
-        title = "Home")
-    else:
-         return render_template(
-        "home2.html",
+   
+    return render_template(
+        "index.html",
         title = "Home")
 
+#Routes login
+@app.route('/login')
+def login():
+    return render_template('login.html')
+#Route clients
 @app.route("/clients")
+
 def clients():
     return render_template(
         "clients.html",
@@ -58,3 +61,12 @@ def cadastro_clientes():
     return render_template(
         "cadastroClientes.html",
         title = "Orçamentos")
+
+
+@app.route("/test", defaults={'name' : None})
+@app.route("/test/<name>")
+def test(name):
+    if name:
+        return "Olá, %s!" % name
+    else:
+        return "Olá usuário"
