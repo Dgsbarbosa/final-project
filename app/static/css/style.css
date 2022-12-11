@@ -1,0 +1,76 @@
+body {
+    padding: 20px;
+
+}
+
+.nav-item {
+    padding: 20px;
+
+}
+
+.home {
+    background-image: url("/static/images/youtube_profile_image.png");
+    background-repeat: no-repeat;
+    background-size: 15%;
+    background-position: center;
+    display: flex;
+    margin-top: 100px;
+    justify-content: space-around;
+    align-items: center;
+    height: 300px;
+
+}
+
+.home-item {
+    background-color: DodgerBlue;
+    color: white;
+    width: 300px;
+    height: 300px;
+    margin: 10px;
+    text-align: center;
+    line-height: 300px;
+    font-size: 30px;
+
+
+
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+.home-item:hover {
+    width: 350px;
+    height: 350px;
+    font-size: 40px;
+    border: solid 2px black;
+}
+
+.login {
+    margin-left: 200px;
+}
+
+
+
+/* Responsive layout - makes a one column layout instead of a two-column layout */
+@media (max-width: 800px) {
+    .home {
+        flex-direction: column;
+        margin-top: 200px;
+        background-image: none;
+    }
+
+    .home-item {
+        width: 300px;
+        height: 300px;
+    }
+
+}
