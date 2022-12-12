@@ -1,9 +1,10 @@
-from flask import render_template
+from flask import render_template, flash
 from app import app, db
 from app.models.forms import LoginForm
 from app.models.tables import User  
+from flask_login import login_user
 
-status = True
+
 #Rotas
 @app.route("/index")
 @app.route("/")
@@ -14,13 +15,18 @@ def index():
         title = "Home")
 
 #Routes login
-@app.route('/login', methods = ['POST', 'GET'])
+@app.route('/login', methods = ['GET', 'POST'])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        print(form.username.data)
+        user = User.query.filter_by(username=form.username.data).first()
+        if user and user.password == form.data.password:
+            login_user(user)
+            flash("Logged in.")
+        else:
+            flash("Invalid login")    
     else:
-        print(form.errors)    
+        print(form.errors)
     return render_template('login.html', form=form)
 
 #Route clients
@@ -67,21 +73,3 @@ def cadastro_clientes():
     return render_template(
         "cadastroClientes.html",
         title = "Orçamentos")
-
-"""
-@app.route("/test", defaults={'name' : None})
-@app.route("/test/<name>")
-def test(name):
-    if name:
-        return "Olá, %s!" % name
-    else:
-        return "Olá usuário"
-
-@app.route("/test2", defaults={'info': None})
-@app.route("/test2/<info>")
-def test2(info):
-    i = User("TESTE", "1234", "Douglas Barbosa", "teste@gmail.com")
-    db.session.add(i)
-    db.session.commit()
-    return "OK"
-"""

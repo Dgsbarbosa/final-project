@@ -11,8 +11,8 @@ migrate = Migrate(app, db)
 
 manager = Manager(app)
 
-lm = LoginManager(app)
- 
+lm = LoginManager()
+lm.init_app(app)
 
 from app.models import tables, forms 
 from app.controllers import default
