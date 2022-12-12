@@ -1,7 +1,7 @@
 from flask import render_template
-from app import app
+from app import app, db
 from app.models.forms import LoginForm
-
+from app.models.tables import User  
 
 status = True
 #Rotas
@@ -68,7 +68,7 @@ def cadastro_clientes():
         "cadastroClientes.html",
         title = "Orçamentos")
 
-
+"""
 @app.route("/test", defaults={'name' : None})
 @app.route("/test/<name>")
 def test(name):
@@ -76,3 +76,12 @@ def test(name):
         return "Olá, %s!" % name
     else:
         return "Olá usuário"
+
+@app.route("/test2", defaults={'info': None})
+@app.route("/test2/<info>")
+def test2(info):
+    i = User("TESTE", "1234", "Douglas Barbosa", "teste@gmail.com")
+    db.session.add(i)
+    db.session.commit()
+    return "OK"
+"""

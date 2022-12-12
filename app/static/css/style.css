@@ -70,12 +70,18 @@ background: #eee;
 height: calc(100% - 73px);
 
 }
+.block{
+justify-content: center;}
 
-footer{
-    background-color: blue;
+.footer {
     position: fixed;
-    margin-bottom: auto;
-}
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(51, 39, 223);
+    color: white;
+    text-align: center;
+  }
 @media (max-width: 450px) {
 .h-custom {
 height: 100%;

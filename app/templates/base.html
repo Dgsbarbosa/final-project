@@ -43,7 +43,8 @@
           </li>
         </ul>
         <div class="login">
-          <a href="templates\home2.html" class="btn btn-primary btn-sm active" role="button" aria-pressed="true" >Entrar</a>
+          <a href="templates\home2.html" class="btn btn-primary btn-sm active" role="button"
+            aria-pressed="true">Entrar</a>
           <a href="#" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">Inscrever-se</a>
 
 
@@ -52,12 +53,14 @@
     </div>
   </nav>
 
-  
-  
-  {% block conteudo%} 
-  {% endblock conteudo%}
 
-<footer class="footer" >Copyright © 2022. All rights reserved.</footer>
+  <div class="block">
+    {% block conteudo%}
+    {% endblock conteudo%}
+  </div>
+  <div class="footer">
+    <p>Footer</p>
+  </div>
 
 
 
