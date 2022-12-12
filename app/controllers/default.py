@@ -1,6 +1,6 @@
 from flask import render_template
 from app import app
-
+from app.models.forms import LoginForm
 
 
 status = True
@@ -14,9 +14,15 @@ def index():
         title = "Home")
 
 #Routes login
-@app.route('/login')
+@app.route('/login', methods = ['POST', 'GET'])
 def login():
-    return render_template('login.html')
+    form = LoginForm()
+    if form.validate_on_submit():
+        print(form.username.data)
+    else:
+        print(form.errors)    
+    return render_template('login.html', form=form)
+
 #Route clients
 @app.route("/clients")
 

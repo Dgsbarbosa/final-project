@@ -70,6 +70,12 @@ background: #eee;
 height: calc(100% - 73px);
 
 }
+
+footer{
+    background-color: blue;
+    position: fixed;
+    margin-bottom: auto;
+}
 @media (max-width: 450px) {
 .h-custom {
 height: 100%;
