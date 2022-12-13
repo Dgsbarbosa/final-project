@@ -1,4 +1,52 @@
 {% extends "base.html" %}
 {% block conteudo %}
- <div class="db_clientes"></div>
+
+<h1>Clientes</h1>
+
+<div class="position-relative overflow-hidden p-3 p-md-1 m-md-3 text-center ">
+
+  <div>
+    <a href="{{ url_for('cadastro_clientes') }}" class="btn btn-primary btn-sm active" role="button"
+      aria-pressed="true">Novo</a>
+  </div>
+
+  <div>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Endereço</th>
+          <th scope="col">Bairro</th>
+          <th scope="col">CEP</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Telefone</th>
+          <th scope="col">Telefone</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          {% for client in clients %}
+          <th scope="row">{{ client.id }}</th>
+          <td>{{ client.name }}</td>
+          <td>{{ client.email }}</td>
+          <td>{{ client.address }}</td>
+          <td>{{ client.bairro }}</td>
+          <td>{{ client.cep }}</td>
+          <td>{{ client.state }}</td>
+          <td>{{ client.phone }}</td>
+          <td>{{ client.phone2 }}</td>
+        </tr>
+
+
+        {% endfor %}
+
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
 {% endblock conteudo %}

@@ -1,5 +1,37 @@
 {% extends 'base.html' %}
 
 {% block conteudo %}
-    
+
+<h1>Orçamentos</h1>
+
+<div class="position-relative overflow-hidden p-3 p-md-1 m-md-3 text-center ">
+  <div>
+    <a href="{{ url_for('folha_orcamentos') }}" class="btn btn-primary btn-sm active" role="button"
+      aria-pressed="true">Novo</a>
+  </div>
+  <div>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">First</th>
+          <th scope="col">Last</th>
+          <th scope="col">Handle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
 {% endblock conteudo %}
