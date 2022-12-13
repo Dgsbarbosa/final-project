@@ -40,19 +40,13 @@ class Clients(db.Model):
     name = db.Column(db.String)
     email = db.Column(db.String, unique=True)
     address = db.Column(db.String)
-    bairro = db.Column(db.String)
-    cep = db.Column(db.String)
-    state = db.Column(db.String)
     phone = db.Column(db.String)
     phone2 = db.Column(db.String)
 
-    def __init__(self, name, email, address, bairro, cep, state, phone, phone2 ):
+    def __init__(self, name, email, address, phone, phone2 ):
         self.name = name
         self.email = email
         self.address = address
-        self.bairro = bairro
-        self.cep = cep
-        self.state = state
         self.phone = phone
         self.phone2 = phone2
 
