@@ -1,5 +1,39 @@
 {% extends "base.html" %}
 
 {% block conteudo %}
- Cadastro clientes
-{% endblock conteudo %}
+
+<div class="col-md-4 col-md-offset-4 position-relative overflow-hidden p-3 p-md-1 m-md-3 bg-light ">
+
+    <h2>Cadastro de Clientes</h2>
+
+    <form action="" method="POST" novalidate>
+
+
+        <div class="form-group">
+            <label for="">Nome</label>
+            <input type="text" class="form-control" , placeholder="Digite sua senha">
+
+
+        </div>
+
+        <div class="form-group">
+            <label for="">Password</label>
+            <input type="text" class="form-control" , placeholder="Digite sua senha">
+
+
+        </div>
+
+        <div class="checkbox" style="display: flex; justify-content: space-around; margin: 10px;">
+            <div>
+                <label for="">
+                    Remember me
+                </label>
+                <input type="checkbox">
+            </div>
+
+            <a href=# class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Login</a>
+        </div>
+
+    </form>
+</div>
+{% endblock%}

@@ -81,7 +81,8 @@ def folha_orcamentos():
         "folhaOrcamento.html",
         title = "Criar Orçamento")
 
-@app.route("/cadastro_clientes")
+# Cadastro de Clientes
+@app.route("/cadastro_clientes",  methods=['GET', 'POST'])
 def cadastro_clientes():
     return render_template(
         "cadastroClientes.html",
