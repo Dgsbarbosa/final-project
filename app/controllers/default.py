@@ -3,7 +3,7 @@ from flask_login import login_user, logout_user
 from app import app, db, lm
 
 from app.models.tables import User, Clients
-from app.models.forms import LoginForm
+from app.models.forms import LoginForm, MyForm
  
 
 
@@ -69,6 +69,7 @@ def contatos():
         "contatos.html",
         title = "Contatos")
 
+# Routes Orcamentos
 @app.route("/orcamentos")
 def orcamentos():
     return render_template(
@@ -84,9 +85,13 @@ def folha_orcamentos():
 # Cadastro de Clientes
 @app.route("/cadastro_clientes",  methods=['GET', 'POST'])
 def cadastro_clientes():
+    form = MyForm()
+    if form.validate_on_submit():
+        return redirect('clients.html')
     return render_template(
         "cadastroClientes.html",
-        title = "Orçamentos")
+        form=form)
+        
 
         
 

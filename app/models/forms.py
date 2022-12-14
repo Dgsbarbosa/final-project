@@ -9,3 +9,8 @@ class LoginForm(FlaskForm):
     password = PasswordField("password", validators=[DataRequired()])
     
     remember_me = BooleanField("remember_me")
+
+class MyForm(FlaskForm):
+    nome = StringField("nome", validators=[DataRequired()])
+    email = StringField("email")
+    endereco = StringField("endereco")

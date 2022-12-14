@@ -47,13 +47,13 @@
         <div class="login">
 
           {% if current_user.is_authenticated %}
-          <a href="{{ url_for('logout') }}" class="btn btn-primary btn-sm active" role="button"
+          <a href="{{ url_for('logout') }}" class="btn btn-primary btn-lg active" role="button"
             aria-pressed="true">Logout</a>
 
           {% else %}
-          <a href="{{ url_for('login') }}" class="btn btn-primary btn-sm active" role="button"
+          <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg active" role="button"
             aria-pressed="true">Login</a>
-          <a href="#" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">Inscrever-se</a>
+          <a href="#" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Inscrever-se</a>
 
           {% endif %}
 
@@ -65,7 +65,7 @@
 
   {% with messages = get_flashed_messages() %}
   {% if messages %}
-  <div class="alert alert warninf">
+  <div class="alert-error">
     <ul class=flashes>
       {% for message in messages %}
       <li>{{ message }}</li>
@@ -77,7 +77,7 @@
 
   {% if current_user.is_authenticated %}
 
-  <div style="display: flex; justify-content: center">
+  <div >
     {% block conteudo %}
 
     {% endblock %}
@@ -87,7 +87,7 @@
   {% else %}
   <div class="position-relative overflow-hidden p-3 p-md-1 m-md-3 text-center bg-light ">
     <h2>Faça o login para continuar</h2>
-    <a href="{{ url_for('login') }}" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Login</a>
+    <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Login</a>
   </div>
   <div style="display: flex; justify-content: center">
     {% block login %}
