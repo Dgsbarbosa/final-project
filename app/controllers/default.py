@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 from flask import render_template, flash, redirect, url_for, request, session
+=======
+from flask import render_template, flash, redirect, url_for 
+>>>>>>> parent of 307cada (update cadastro de clients)
 from flask_login import login_user, logout_user
 from app import app, db, lm
 
@@ -76,7 +80,6 @@ def orcamentos():
         "orcamentos.html",
         title = "Orçamentos")
 
-# Route cadastra orcamento
 @app.route("/folha_orcamentos")
 def folha_orcamentos():
     return render_template(
@@ -85,8 +88,15 @@ def folha_orcamentos():
 
 # Cadastro de Clientes
 @app.route("/cadastro_clientes",  methods=['GET', 'POST'])
+<<<<<<< HEAD
 def cadastro_clientes():   
     form = MyForm
+=======
+def cadastro_clientes():
+    form = MyForm()
+    if form.validate_on_submit():
+        return redirect('clients.html')
+>>>>>>> parent of 307cada (update cadastro de clients)
     return render_template(
         "cadastroClientes.html",
         title = "Clientes", 
@@ -95,9 +105,7 @@ def cadastro_clientes():
      
 
         
-@app.route('/cadastrado')
-def cadastrado():
-    return render_template('clients.html')
+
         
 
 @app.route("/logout")
