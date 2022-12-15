@@ -16,4 +16,4 @@ class MyForm(FlaskForm):
     endereco = StringField("endereco")
     telefone = StringField("telefone")
     telefone2 = StringField("telefone2")
-    submt = SubmitField('enviar')
+    

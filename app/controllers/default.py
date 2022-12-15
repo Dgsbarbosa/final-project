@@ -1,5 +1,5 @@
 from flask import render_template, flash, redirect, url_for, request, session
-from flask_login import login_user, logout_user, session_protected
+from flask_login import login_user, logout_user
 from app import app, db, lm
 
 from app.models.tables import User, Clients
@@ -85,23 +85,15 @@ def folha_orcamentos():
 
 # Cadastro de Clientes
 @app.route("/cadastro_clientes",  methods=['GET', 'POST'])
-def cadastro_clientes():
-    form = MyForm()
-    if form.validate_on_submit():
-        session['nome'] = form.nome.data
-        session['email'] = form.email.data
-        session['telefone'] = form.telefone.data
-        session['telefone2'] = form.telefone2.data
-
-        return redirect(url_for('cadastrado'))
-
-    print(form.nome)
-    print(form.email)
-    print(form.endereco)
-    print(form.telefone)
+def cadastro_clientes():   
+    form = MyForm
     return render_template(
         "cadastroClientes.html",
+        title = "Clientes", 
         form=form)
+
+     
+
         
 @app.route('/cadastrado')
 def cadastrado():
