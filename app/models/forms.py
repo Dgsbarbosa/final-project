@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField
+from wtforms import StringField, PasswordField, BooleanField, SelectField, TextAreaField, SubmitField
 from wtforms.validators import DataRequired
 
 
@@ -14,3 +14,6 @@ class MyForm(FlaskForm):
     nome = StringField("nome", validators=[DataRequired()])
     email = StringField("email")
     endereco = StringField("endereco")
+    telefone = StringField("telefone")
+    telefone2 = StringField("telefone2")
+    submt = SubmitField('enviar')
