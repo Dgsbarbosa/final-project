@@ -2,7 +2,7 @@ from app import db
 
 class User(db.Model):
     __tablename__ = "users"
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String, unique=True)
     password = db.Column(db.String)
     name = db.Column(db.String)
@@ -36,8 +36,8 @@ class User(db.Model):
 
 class Clients(db.Model):
     _tablename__ = "clients"
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(150))
     email = db.Column(db.String, unique=True)
     address = db.Column(db.String)
     phone = db.Column(db.String)

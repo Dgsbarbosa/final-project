@@ -1,42 +1,42 @@
 {% extends "base.html" %}
-
 {% block conteudo %}
 
 <div class="position-relative overflow-hidden p-3 p-md-1 m-md-3 bg-light">
 
-    <h2>Cadastro de Clientes</h2>
+    <h2>Editar Cliente: {{ client.nome }}</h2>
 
 
-    <form action="/cadastro_clientes" method="POST">
+    <form action="/edit/{{ client.id }}" method="POST">
         <div class=" row" style="margin-top: 20px; margin-bottom: 0px">
             <div class="col">
+
                 <label for="">Nome</label>
-                <input type="text" id="nome" name="nome" class="form-control" placeholder="Nome"> 
+                <input type="text" id="nome" name="nome" class="form-control" placeholder="Nome" value="{{ client.nome }}"> 
 
             </div>
 
             <div class="col">
                 <label for="">Email</label>
-                <input type="text" name="email" id="email" class="form-control" placeholder="exemplo@email.com"> 
+                <input type="text" name="email" id="email" class="form-control" placeholder="exemplo@email.com" value="{{ client.email }}"> 
             </div>
         </div>
 
         <div class="row" style="margin-top: 20px;">
             <div class="col">
                 <label for="">Endereço</label>
-                <input type="text" class="form-control" id="endereco" name="endereco" placeholder="Endereço"> 
+                <input type="text" class="form-control" id="endereco" name="endereco" placeholder="Endereço" value="{{ client.endereco }}"> 
             </div>
 
         </div>
         <div class="row" style="margin-top: 20px;">
             <div class="col">
                 <label for="">Telefone 1</label>
-                <input type="tel" class="form-control" placeholder="Telefone 1" id="telefone" name="telefone">
+                <input type="tel" class="form-control" placeholder="Telefone 1" id="telefone" name="telefone" value="{{ client.telefone }}">
             </div>
 
             <div class="col">
                 <label for="">Telefone 2</label>
-                <input type="tel" class="form-control" placeholder="Telefone 2" id="telefone2" name="telefone2">
+                <input type="tel" class="form-control" placeholder="Telefone 2" id="telefone2" name="telefone2" value="{{ client.telefone2 }}">
             </div>
         </div>
 
@@ -44,12 +44,8 @@
 
             <input type="reset" class="btn btn-danger btn-lg active" name="limpar" value="Limpar">
 
-            <input class="btn btn-primary btn-lg active" type="submit" name="enviar" value="Enviar">
+            <input class="btn btn-primary btn-lg active" type="submit" value="Enviar">
         </div>
     </form>
 
-
-
-
-</div>
-{% endblock %}
+{% endblock conteudo %}

@@ -11,7 +11,7 @@
   </div>
 
   <div>
-    <table class="table">
+    <table class="table table-striped">
       <thead class="thead-dark">
         <tr>
           <th scope="col">ID</th>
@@ -20,8 +20,8 @@
           <th scope="col">Endereço</th>
           <th scope="col">Telefone</th>
           <th scope="col">Telefone</th>
-          <th scope="col">Excluir</th>
-          
+          <th scope="col">Ações</th>
+
 
         </tr>
       </thead>
@@ -34,7 +34,15 @@
           <td>{{ client.address }}</td>
           <td>{{ client.phone }}</td>
           <td>{{ client.phone2 }}</td>
-          <td><input type="button" class="btn btn-danger" value="X"/></td>
+          <td>
+            <a href="/edit">
+              <input type="button" class="btn btn-primary" value="editar">
+            </a>
+            <a href="/delete/{{client.id}}">
+              <input type="button" class="btn btn-danger" value="Deletar" />
+            </a>
+          </td>
+
         </tr>
 
 

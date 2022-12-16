@@ -1,8 +1,8 @@
-<<<<<<< HEAD
+
 from flask import render_template, flash, redirect, url_for, request, session
-=======
+
 from flask import render_template, flash, redirect, url_for 
->>>>>>> parent of 307cada (update cadastro de clients)
+
 from flask_login import login_user, logout_user
 from app import app, db, lm
 
@@ -41,16 +41,7 @@ def login():
     return render_template('login.html', form=form)
 
 
-#Route clients
-@app.route("/clients", methods=['GET'])
-def clients():
-    
-    clients =  Clients.query.filter_by().all()
-    print(clients)
-    print("--------")
-    return render_template(
-        "clients.html",
-        title = "Clientes", clients=clients)
+
 
 #Route Profile        
 @app.route("/perfil")
@@ -86,23 +77,61 @@ def folha_orcamentos():
         "folhaOrcamento.html",
         title = "Criar Orçamento")
 
+#Route clients
+@app.route("/clients", methods=['GET'])
+def clients():
+    
+    clients =  Clients.query.all()
+    
+    return render_template(
+        "clients.html",
+        title = "Clientes", clients=clients)
+
+
 # Cadastro de Clientes
 @app.route("/cadastro_clientes",  methods=['GET', 'POST'])
-<<<<<<< HEAD
-def cadastro_clientes():   
-    form = MyForm
-=======
+
 def cadastro_clientes():
-    form = MyForm()
-    if form.validate_on_submit():
-        return redirect('clients.html')
->>>>>>> parent of 307cada (update cadastro de clients)
+    
+    if request.method == 'POST':
+        clients = Clients(
+            name=request.form['nome'],
+            email=request.form['email'],
+            address=request.form['endereco'],
+            phone=request.form['telefone'],
+            phone2=request.form['telefone2'],
+
+        )
+        db.session.add(clients)
+        db.session.commit()
+        return redirect(url_for("clients"))
+
     return render_template(
         "cadastroClientes.html",
-        title = "Clientes", 
-        form=form)
+        title = "Cadastro de Cliente")
 
-     
+@app.route("/edit/<int:id>", methods=['GET','POST'])
+def edit(id):
+    client = Clients.query.get(id)
+    if request.method == 'POST':
+        client.name=request.form['nome']
+        client.address=request.form['endereco']
+        client.phone=request.form['telefone']
+        client.phone2=request.form['telefone2']
+        client.email=request.form['email']
+        db.session.commit()
+        return redirect(url_for("clients"))
+
+    return render_template("editClient.html", client=client,
+    title="Editar Cliente") 
+
+@app.route("/delete/<int:id>")
+def delete(id):
+    clients = Clients.query.get(id)
+    db.session.delete(clients)
+    db.session.commit()
+    return redirect(url_for("clients"))
+
 
         
 

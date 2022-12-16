@@ -13,11 +13,9 @@ class LoginForm(FlaskForm):
 class MyForm(FlaskForm):
     nome = StringField("nome", validators=[DataRequired()])
     email = StringField("email")
-<<<<<<< HEAD
     endereco = StringField("endereco")
     telefone = StringField("telefone")
     telefone2 = StringField("telefone2")
     
-=======
-    endereco = StringField("endereco")
->>>>>>> parent of 307cada (update cadastro de clients)
+    
+
