@@ -3,15 +3,15 @@
 
 <div class="position-relative overflow-hidden p-3 p-md-1 m-md-3 bg-light">
 
-    <h2>Editar Cliente: {{ client.nome }}</h2>
+    <h2>Editar Cliente: {{ client.name }}</h2>
 
 
-    <form action="/edit/{{ client.id }}" method="POST">
+    <form action="/edit/{{ client.id }}" class="container" method="POST">
         <div class=" row" style="margin-top: 20px; margin-bottom: 0px">
             <div class="col">
 
                 <label for="">Nome</label>
-                <input type="text" id="nome" name="nome" class="form-control" placeholder="Nome" value="{{ client.nome }}"> 
+                <input type="text" id="nome" name="nome" class="form-control" placeholder="Nome" value="{{ client.name }}"> 
 
             </div>
 
@@ -24,19 +24,19 @@
         <div class="row" style="margin-top: 20px;">
             <div class="col">
                 <label for="">Endereço</label>
-                <input type="text" class="form-control" id="endereco" name="endereco" placeholder="Endereço" value="{{ client.endereco }}"> 
+                <input type="text" class="form-control" id="endereco" name="endereco" placeholder="Endereço" value="{{ client.address }}"> 
             </div>
 
         </div>
         <div class="row" style="margin-top: 20px;">
             <div class="col">
                 <label for="">Telefone 1</label>
-                <input type="tel" class="form-control" placeholder="Telefone 1" id="telefone" name="telefone" value="{{ client.telefone }}">
+                <input type="tel" class="form-control" placeholder="Telefone 1" id="telefone" name="telefone" value="{{ client.phone }}">
             </div>
 
             <div class="col">
                 <label for="">Telefone 2</label>
-                <input type="tel" class="form-control" placeholder="Telefone 2" id="telefone2" name="telefone2" value="{{ client.telefone2 }}">
+                <input type="tel" class="form-control" placeholder="Telefone 2" id="telefone2" name="telefone2" value="{{ client.phone2 }}">
             </div>
         </div>
 

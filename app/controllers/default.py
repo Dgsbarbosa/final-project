@@ -110,15 +110,19 @@ def cadastro_clientes():
         "cadastroClientes.html",
         title = "Cadastro de Cliente")
 
-@app.route("/edit/<int:id>", methods=['GET','POST'])
+@app.route('/edit/<int:id>', methods=['GET','POST'])
 def edit(id):
     client = Clients.query.get(id)
-    if request.method == 'POST':
+    if request.method == 'POST':   
+        
         client.name=request.form['nome']
         client.address=request.form['endereco']
         client.phone=request.form['telefone']
         client.phone2=request.form['telefone2']
         client.email=request.form['email']
+        print(id)
+        print(client.name)    
+        
         db.session.commit()
         return redirect(url_for("clients"))
 

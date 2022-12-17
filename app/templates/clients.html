@@ -1,57 +1,97 @@
 {% extends "base.html" %}
 {% block conteudo %}
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+</script>
 
-<h1 style="margin-left: 5%;">Clientes</h1>
-<div class="position-relative overflow-hidden p-3 p-md-1 m-md-3 text-center ">
+<h1 style="margin-left: 15px;padding: 10px">Clientes</h1>
+
+
+<div style="display: flex; justify-content:space-around; align-items:center; margin: 10px;">
+
+  <div class="dropdown" id="order">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      Ordenar por
+    </button>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="#">ID</a></li>
+      <li><a class="dropdown-item" href="#">Nome action</a></li>
+      <li><a class="dropdown-item" href="#">Email</a></li>
+      <li><a class="dropdown-item" href="#">Endereço</a></li>
+
+    </ul>
+  </div>
+
+
+  <input type="text" id="myInput" style="
+      background-image: url('https://img.icons8.com/search'); 
+      background-position:right; 
+      background-repeat: no-repeat; 
+      background-size:5%;
+      width: 40%; font-size: 16px; 
+      padding: 12px 20px 12px;
+      border: 2px solid rgb(0, 0, 0);
+      margin-bottom: 12px;
+      margin-top: 12px;
+      justify-content: center" onkeyup="myFunction()"
+    placeholder="Pesquisar clientes por nome, email, endereço, telefone...">
+
 
   <div>
     <a href="{{ url_for('cadastro_clientes') }}" class="btn btn-primary btn-lg active" role="button"
       aria-pressed="true">Novo</a>
   </div>
 
-  <div>
-    <table class="table table-striped">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">ID</th>
-          <th scope="col">Nome</th>
-          <th scope="col">Email</th>
-          <th scope="col">Endereço</th>
-          <th scope="col">Telefone</th>
-          <th scope="col">Telefone</th>
-          <th scope="col">Ações</th>
-
-
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          {% for client in clients %}
-          <th scope="row">{{ client.id }}</th>
-          <td>{{ client.name }}</td>
-          <td>{{ client.email }}</td>
-          <td>{{ client.address }}</td>
-          <td>{{ client.phone }}</td>
-          <td>{{ client.phone2 }}</td>
-          <td>
-            <a href="/edit">
-              <input type="button" class="btn btn-primary" value="editar">
-            </a>
-            <a href="/delete/{{client.id}}">
-              <input type="button" class="btn btn-danger" value="Deletar" />
-            </a>
-          </td>
-
-        </tr>
-
-
-        {% endfor %}
-
-      </tbody>
-    </table>
-  </div>
-
 
 </div>
+
+<div>
+  <table class="table" id="myTable">
+    <caption>Tabela de clientes</caption>
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Email</th>
+        <th scope="col">Ações</th>
+      </tr>
+    </thead>
+    <tbody id="body">
+      <tr>
+        {% for client in clients %}
+        <th scope="row">{{ client.id }}</th>
+        <td>{{ client.name }}</td>
+        <td>{{ client.email }}</td>
+
+        <td>
+          <a href="/viewClient/{{ client.id }}">
+            <input type="button" class="btn btn-primary btn-sm" value="ver">
+          </a>
+
+          <a href="/edit/{{ client.id }}">
+            <input type="button" class="btn btn-primary btn-sm" value="editar">
+          </a>
+          <a href="/delete/{{client.id}}">
+            <input type="button" class="btn btn-danger btn-sm" value="Deletar" />
+          </a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+
+
+<script>
+  $(document).ready(function () {
+    $("#myInput").on("keyup", function () {
+      var value = $(this).val().toLowerCase();
+      $("#body tr").filter(function () {
+        $(this).toggle($(this).text()
+          .toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
+</script>
 {% endblock %}

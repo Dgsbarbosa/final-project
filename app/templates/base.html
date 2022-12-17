@@ -75,9 +75,14 @@
   {% endif %}
   {% endwith %}
 
+  {% block contato %}
+
+  {% endblock %}
+
   {% if current_user.is_authenticated %}
 
-  <div >
+
+  <div>
     {% block conteudo %}
 
     {% endblock %}
