@@ -1,4 +1,6 @@
 from app import db
+from sqlalchemy import ForeignKey
+from sqlalchemy.orm import relationship
 
 class User(db.Model):
     __tablename__ = "users"
@@ -6,7 +8,8 @@ class User(db.Model):
     username = db.Column(db.String, unique=True)
     password = db.Column(db.String)
     name = db.Column(db.String)
-    email = db.Column(db.String, unique=True) 
+    email = db.Column(db.String, unique=True)
+    
 
     @property
     def is_authenticated(self):
@@ -42,13 +45,33 @@ class Clients(db.Model):
     address = db.Column(db.String)
     phone = db.Column(db.String)
     phone2 = db.Column(db.String)
+    pedidos = db.relationship('Orcaments', backref='clients', lazy=True)
 
-    def __init__(self, name, email, address, phone, phone2 ):
+    def __init__(self, name, email, address, phone, phone2):
         self.name = name
         self.email = email
         self.address = address
         self.phone = phone
         self.phone2 = phone2
+        
 
     def __repr__(self):
-        return "<User %r>" % self.name
+        return "<Clients %r>" % self.name
+
+
+
+class Orcaments(db.Model):
+    _tablename__ = "orcaments"
+    id = db.Column(db.Integer, primary_key=True)
+    pedido_id = db.Column(db.Integer, autoincrement=True)
+    client_id = db.Column(db.Integer, ForeignKey('clients.id'))
+    
+    
+    def __init__(self, pedido_id, client_id):
+        self.pedido_id = pedido_id
+        self.client_id = client_id
+        
+    def __repr__(self):
+        return "<Orcaments %r>" % self.pedido_id
+
+

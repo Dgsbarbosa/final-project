@@ -12,7 +12,7 @@ class LoginForm(FlaskForm):
 
 class MyForm(FlaskForm):
     nome = StringField("nome", validators=[DataRequired()])
-    email = StringField("email")
+    email = StringField("email", validators=[DataRequired()])
     endereco = StringField("endereco")
     telefone = StringField("telefone")
     telefone2 = StringField("telefone2")

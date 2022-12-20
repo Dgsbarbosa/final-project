@@ -1,5 +1,63 @@
 {% extends 'base.html' %}
 
+
+
+<h1 style="margin-left: 15px;padding: 10px">Criar Orçamento</h1>
 {% block conteudo %}
-    Folha de Orçamento
-{% endblock conteudo %}
+
+<div class="position-relative overflow-hidden p-3 p-md-1 m-md-3 bg-light">
+
+    <h2 style="margin-left: 15px;padding: 10px">Cadastro de Orçamento</h2>
+
+
+    <form action="/folha_orcamentos" method="POST">
+        <div class=" row" style="margin-top: 20px; margin-bottom: 0px">
+
+        </div>
+        <div class="col">
+            <label for="">Cliente</label>
+            <input type="text" name="cliente" id="cliente" class="form-control" placeholder="Cliente">
+
+        </div>
+
+
+        <div class="col">
+            <label for=""></label>
+            <input type="email" name="email" id="email" class="form-control" placeholder="exemplo@email.com">
+        </div>
+
+
+        <div class="row" style="margin-top: 20px;">
+            <div class="col">
+                <label for="">Endereço</label>
+                <input type="text" class="form-control" id="endereco" name="endereco" placeholder="Endereço">
+            </div>
+
+        </div>
+        <div class="row" style="margin-top: 20px;">
+            <div class="col">
+                <label for="">Telefone 1</label>
+                <input type="tel" class="form-control" placeholder="(XX)XXXXX-XXXX" id="telefone" name="telefone">
+            </div>
+
+            <div class="col">
+                <label for="">Telefone 2</label>
+                <input type="tel" class="form-control" placeholder="(XX)XXXXX-XXXX" id="telefone2" name="telefone2">
+            </div>
+        </div>
+
+        <div class="buttons" style="display: flex; justify-content: space-evenly; margin: 30px;">
+
+            <input type="reset" class="btn btn-danger btn-lg active" name="limpar" value="Limpar">
+            <div >
+                <input type="reset" class="btn btn-danger btn-lg active" name="voltar" onclick="history.back()" value="Voltar">
+              </div>
+            <input class="btn btn-primary btn-lg active" type="submit" name="enviar" value="Enviar">
+        </div>
+    </form>
+
+
+
+
+</div>
+{% endblock %}

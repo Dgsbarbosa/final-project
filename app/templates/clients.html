@@ -9,17 +9,8 @@
 
 <div style="display: flex; justify-content:space-around; align-items:center; margin: 10px;">
 
-  <div class="dropdown" id="order">
-    <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-      Ordenar por
-    </button>
-    <ul class="dropdown-menu">
-      <li><a class="dropdown-item" href="#">ID</a></li>
-      <li><a class="dropdown-item" href="#">Nome action</a></li>
-      <li><a class="dropdown-item" href="#">Email</a></li>
-      <li><a class="dropdown-item" href="#">Endereço</a></li>
-
-    </ul>
+  <div >
+    <input type="reset" class="btn btn-danger btn-lg active" name="voltar" onclick="history.back()" value="Voltar">
   </div>
 
 
@@ -34,7 +25,7 @@
       margin-bottom: 12px;
       margin-top: 12px;
       justify-content: center" onkeyup="myFunction()"
-    placeholder="Pesquisar clientes por nome, email, endereço, telefone...">
+    placeholder="Pesquisar por nome, email, endereço, telefone...">
 
 
   <div>
@@ -63,6 +54,7 @@
         <td>{{ client.name }}</td>
         <td>{{ client.email }}</td>
 
+        
         <td>
           <a href="/viewClient/{{ client.id }}">
             <input type="button" class="btn btn-primary btn-sm" value="ver">
@@ -72,7 +64,7 @@
             <input type="button" class="btn btn-primary btn-sm" value="editar">
           </a>
           <a href="/delete/{{client.id}}">
-            <input type="button" class="btn btn-danger btn-sm" value="Deletar" />
+            <input type="button" class="btn btn-danger btn-sm"  value="Deletar" />
           </a>
         </td>
       </tr>
@@ -82,7 +74,7 @@
 </div>
 
 
-
+<!--Serch for in table-->
 <script>
   $(document).ready(function () {
     $("#myInput").on("keyup", function () {
@@ -94,4 +86,9 @@
     });
   });
 </script>
+
+<!---->
+
+  
+
 {% endblock %}

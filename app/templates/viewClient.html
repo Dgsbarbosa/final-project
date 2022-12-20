@@ -3,10 +3,10 @@
 
 <div class="position-relative overflow-hidden p-3 p-md-1 m-md-3 bg-light">
 
-    <h2>Editar Cliente: <br> {{ client.name }}</h2>
+    <h2>Visualizar Cliente: <br> {{ client.name }}</h2>
 
 
-    <form action="/edit/{{ client.id }}" class="container" method="POST">
+    <form action="/view/{{ client.id }}" class="container" method="GET">
         <div class=" row" style="margin-top: 20px; margin-bottom: 0px">
             <div class="col">
 
@@ -46,12 +46,14 @@
         </div>
 
         <div class="buttons" style="display: flex; justify-content: space-evenly; margin: 30px;">
-            <input class="btn btn-primary btn-lg active" type="submit" value="Salvar">
-            <input type="reset" class="btn btn-danger btn-lg active" name="voltar" onclick="history.back()"
-                value="Voltar">
 
+            <a href="/edit/{{ client.id }}">
+                <input type="button" class="btn btn-primary btn-lg"  value="Editar">
+            </a>
+            <input type="reset" class="btn btn-danger btn-lg active" name="voltar" onclick="history.back()" value="Voltar">
 
+            
         </div>
     </form>
-
+    
     {% endblock conteudo %}
