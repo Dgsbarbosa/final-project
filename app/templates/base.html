@@ -53,7 +53,8 @@
           {% else %}
           <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg active" role="button"
             aria-pressed="true">Login</a>
-          <a href="#" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Inscrever-se</a>
+
+          <a href="{{ url_for('cadastro_user') }}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Inscrever-se</a>
 
           {% endif %}
 

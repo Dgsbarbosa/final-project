@@ -24,9 +24,28 @@ def index():
         "index.html",
         title="Home")
 
-# Routes login
+#Increver-se
+@app.route("/cadastro_user",  methods=['GET', 'POST'])
+def cadastro_user():
 
+    if request.method == 'POST':
+        user = User(
+            name=request.form['nome'],
+            password=request.form['password'],
+            username=request.form['username'],
+            email=request.form['email']        
+               
 
+        )
+        db.session.add(user)
+        db.session.commit()
+        return redirect(url_for("index"))
+
+    return render_template(
+        "cadastroUser.html",
+        title="Cadastro de Cliente")
+
+#Routes login
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
@@ -50,8 +69,6 @@ def perfil():
         title="Meu Perfil")
 
 # Route Business
-
-
 @app.route("/negocio")
 def negocio():
     return render_template(
@@ -59,8 +76,6 @@ def negocio():
         title="Meu Negócio")
 
 # Route Contacts
-
-
 @app.route("/contatos")
 def contatos():
     return render_template(
@@ -68,8 +83,6 @@ def contatos():
         title="Contatos")
 
 # Routes Orcamentos
-
-
 @app.route("/orcamentos", methods=['GET'])
 def orcamentos():
     orcaments = Orcaments.query.all()
@@ -78,27 +91,34 @@ def orcamentos():
         title="Orçamentos", orcaments=orcaments)
 
 # View table orcaments
+@app.route('/view_orcaments/<int:id>', methods=['GET'])
+def view_orcaments(id):
+    orcament = Orcaments.query.filter_by(id=id).first_or_404()
+
+    return render_template('viewOrcaments.html', orcament=orcament)
+
 
 # create orcaments
-
-
 @app.route("/folha_orcamentos", methods=['GET', 'POST'])
 def folha_orcamentos():
 
     clients = Clients.query.all()
-
     print(clients)
+    for i in clients:
+        print(i.id)
+        print(i.name)
+        print(i.email)
+        print(i.address)
 
     if request.method == 'POST':
 
         pedidos = Orcaments(
             pedido_id=1,
-            client_id="",
-            
+            client_id=""
 
         )
         print(pedidos)
-        
+
         db.session.add(pedidos)
         db.session.commit()
         return redirect(url_for("orcamentos"))
@@ -108,15 +128,13 @@ def folha_orcamentos():
         title="Criar Orçamento")
 
 
-
-
 # Delete orcaments
 @app.route("/delet_orcaments/<int:id>")
 def delet_orcaments(id):
-    orcament = Orcaments.query.get(id).first_or_404()
+    orcament = Orcaments.query.get(id)
     print(orcament)
-    #db.session.delet_orcaments(orcament)
-    #db.session.commit()
+    db.session.delete(orcament)
+    db.session.commit()
     return redirect(url_for("orcamentos"))
 
 
@@ -181,6 +199,8 @@ def view(id):
     return render_template('viewClient.html', client=client)
 
 # delete client
+
+
 @app.route("/delete/<int:id>")
 def delete(id):
     clients = Clients.query.get(id)

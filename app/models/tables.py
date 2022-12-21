@@ -64,7 +64,7 @@ class Orcaments(db.Model):
     _tablename__ = "orcaments"
     id = db.Column(db.Integer, primary_key=True)
     pedido_id = db.Column(db.Integer, autoincrement=True)
-    client_id = db.Column(db.Integer, ForeignKey('clients.id'))
+    client_id = db.Column(db.Integer, db.ForeignKey('clients.id'), nullable=False)
     
     
     def __init__(self, pedido_id, client_id):
@@ -72,6 +72,6 @@ class Orcaments(db.Model):
         self.client_id = client_id
         
     def __repr__(self):
-        return "<Orcaments %r>" % self.pedido_id
+        return "<Orcaments %r>" % self.client_id
 
 

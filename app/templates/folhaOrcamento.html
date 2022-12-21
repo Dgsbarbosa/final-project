@@ -14,16 +14,35 @@
         <div class=" row" style="margin-top: 20px; margin-bottom: 0px">
 
         </div>
-        <div class="col">
-            <label for="">Cliente</label>
-            <input type="text" name="cliente" id="cliente" class="form-control" placeholder="Cliente">
+
+
+
+        <div class="row">
+            <div class="col">
+                <label for="">Cliente</label>
+                
+               
+                
+
+                <input type="text" name="browser" id="browser">
+
+            </div>
+
+            <div class="col">
+                <label for="">Data</label>
+                <input type="date">
+            </div>
 
         </div>
 
 
-        <div class="col">
-            <label for=""></label>
-            <input type="email" name="email" id="email" class="form-control" placeholder="exemplo@email.com">
+        <div class="row">
+            <div class="col">
+                <label for=""></label>
+                <input type="email" name="email" id="email" class="form-control" placeholder="exemplo@email.com">
+            </div>
+
+
         </div>
 
 
@@ -34,6 +53,7 @@
             </div>
 
         </div>
+
         <div class="row" style="margin-top: 20px;">
             <div class="col">
                 <label for="">Telefone 1</label>
@@ -49,9 +69,10 @@
         <div class="buttons" style="display: flex; justify-content: space-evenly; margin: 30px;">
 
             <input type="reset" class="btn btn-danger btn-lg active" name="limpar" value="Limpar">
-            <div >
-                <input type="reset" class="btn btn-danger btn-lg active" name="voltar" onclick="history.back()" value="Voltar">
-              </div>
+            <div>
+                <input type="reset" class="btn btn-danger btn-lg active" name="voltar" onclick="history.back()"
+                    value="Voltar">
+            </div>
             <input class="btn btn-primary btn-lg active" type="submit" name="enviar" value="Enviar">
         </div>
     </form>
