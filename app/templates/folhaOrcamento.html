@@ -11,36 +11,40 @@
 
 
     <form action="/folha_orcamentos" method="POST">
+
         <div class=" row" style="margin-top: 20px; margin-bottom: 0px">
+        </div>
+
+        <div class="row">
+            <div class="col">
+
+                <input class="form-control" list="clients" name="client" id="client" placeholder="Cliente">
+                <datalist id="clients">
+
+                    {% for c in clients %}
+                    <option value="{{ c.id }} - {{ c.name }}">
+                        {% endfor %}
+
+                </datalist>
+            </div>
+
+            <div class="col">
+
+                <input class="form-control" id="date" name="date" type="date">
+            </div>
 
         </div>
 
 
-
         <div class="row">
-            <div class="col">
-                <label for="">Cliente</label>
-                
-               
-                
 
-                <input type="text" name="browser" id="browser">
-
-            </div>
-
-            <div class="col">
-                <label for="">Data</label>
-                <input type="date">
-            </div>
-
-        </div>
-
-
-        <div class="row">
-            <div class="col">
+            <div class="col" class="form-control">
                 <label for=""></label>
-                <input type="email" name="email" id="email" class="form-control" placeholder="exemplo@email.com">
+                <textarea class="form-control" placeholder="Descreva o serviço" id="pedido" name="pedido"
+                    rows="3"></textarea>
+
             </div>
+
 
 
         </div>
@@ -48,37 +52,78 @@
 
         <div class="row" style="margin-top: 20px;">
             <div class="col">
-                <label for="">Endereço</label>
-                <input type="text" class="form-control" id="endereco" name="endereco" placeholder="Endereço">
+
+                <input class="form-control" type="Text" size="12" onKeyUp="mascaraMoeda(this, event)" value=""
+                    name="valor" id="valor" placeholder="Valor">
+            </div>
+
+            <div class="col">
+                <input class="form-control"  type="Text" size="12" onKeyUp="mascaraMoeda(this, event)" value="" name="desconto"
+                    id="desconto" placeholder="Desconto">
+
             </div>
 
         </div>
 
         <div class="row" style="margin-top: 20px;">
             <div class="col">
-                <label for="">Telefone 1</label>
-                <input type="tel" class="form-control" placeholder="(XX)XXXXX-XXXX" id="telefone" name="telefone">
+
+                <input class="form-control"  list="pagtos" name="pagto" id="pagto" placeholder="Forma de pagamento" >
+                <datalist id="pagtos" name="pagtos">
+
+                    <option value="A vista">
+                    <option value="50% de entrada + 50% na entrega">
+                    <option value="Parcelado">
+
+
+                </datalist>
             </div>
 
             <div class="col">
-                <label for="">Telefone 2</label>
-                <input type="tel" class="form-control" placeholder="(XX)XXXXX-XXXX" id="telefone2" name="telefone2">
+                <h1 id="total" name="total"> </h1>
             </div>
+
+
         </div>
 
         <div class="buttons" style="display: flex; justify-content: space-evenly; margin: 30px;">
 
             <input type="reset" class="btn btn-danger btn-lg active" name="limpar" value="Limpar">
-            <div>
-                <input type="reset" class="btn btn-danger btn-lg active" name="voltar" onclick="history.back()"
-                    value="Voltar">
-            </div>
+
+            <input type="reset" class="btn btn-danger btn-lg active" name="voltar" onclick="history.back()"
+                value="Voltar">
+
             <input class="btn btn-primary btn-lg active" type="submit" name="enviar" value="Enviar">
+
+
         </div>
     </form>
-
-
-
-
 </div>
+
+<script>
+    String.prototype.reverse = function () {
+        return this.split('').reverse().join('');
+    };
+
+    function mascaraMoeda(campo, evento) {
+        var tecla = (!evento) ? window.event.keyCode : evento.which;
+        var valor = campo.value.replace(/[^\d]+/gi, '').reverse();
+        var resultado = "";
+        var mascara = "##.###.###,##".reverse();
+        for (var x = 0, y = 0; x < mascara.length && y < valor.length;) {
+            if (mascara.charAt(x) != '#') {
+                resultado += mascara.charAt(x);
+                x++;
+            } else {
+                resultado += valor.charAt(y);
+                y++;
+                x++;
+            }
+        }
+        campo.value = resultado.reverse();
+    }
+
+   
+</script>
+
 {% endblock %}

@@ -101,7 +101,7 @@ def view_orcaments(id):
 # create orcaments
 @app.route("/folha_orcamentos", methods=['GET', 'POST'])
 def folha_orcamentos():
-
+    
     clients = Clients.query.all()
     print(clients)
     for i in clients:
@@ -109,23 +109,46 @@ def folha_orcamentos():
         print(i.name)
         print(i.email)
         print(i.address)
+    
+    print("--------------")
 
+    name = ['browser']
+    print(name)
+
+    print("--------------")
+
+    orcamentos = Orcaments.query.all()
+    print(orcamentos)
+    for i in orcamentos:
+        print(i.id)
+        print(i.client)
+        print(i.date)
+        print(i.date)
+        print(i.pedido)
+   
+    
     if request.method == 'POST':
-
-        pedidos = Orcaments(
-            pedido_id=1,
-            client_id=""
+        
+        pedido = Orcaments(
+            client=request.form['client'],              
+            pedido=request.form['pedido'],
+            valor=request.form['valor'],
+            date=request.form['date'],            
+            desconto=request.form['desconto'],
+            forma_pagto=request.form['pagto'],
+            valor_total=request.form['total']
+               
 
         )
-        print(pedidos)
+        print(pedido)
 
-        db.session.add(pedidos)
+        db.session.add(pedido)
         db.session.commit()
         return redirect(url_for("orcamentos"))
 
     return render_template(
         "folhaOrcamento.html",
-        title="Criar Orçamento")
+        title="Criar Orçamento", clients=clients)
 
 
 # Delete orcaments
@@ -190,17 +213,14 @@ def edit(id):
                            title="Editar Cliente")
 
 # View client
-
-
 @app.route('/viewClient/<int:id>', methods=['GET'])
 def view(id):
     client = Clients.query.filter_by(id=id).first_or_404()
 
     return render_template('viewClient.html', client=client)
 
+
 # delete client
-
-
 @app.route("/delete/<int:id>")
 def delete(id):
     clients = Clients.query.get(id)

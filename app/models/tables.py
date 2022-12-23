@@ -1,6 +1,9 @@
 from app import db
-from sqlalchemy import ForeignKey
+from sqlalchemy import Column, Integer, DateTime
 from sqlalchemy.orm import relationship
+import datetime
+
+
 
 class User(db.Model):
     __tablename__ = "users"
@@ -45,7 +48,7 @@ class Clients(db.Model):
     address = db.Column(db.String)
     phone = db.Column(db.String)
     phone2 = db.Column(db.String)
-    pedidos = db.relationship('Orcaments', backref='clients', lazy=True)
+   
 
     def __init__(self, name, email, address, phone, phone2):
         self.name = name
@@ -63,15 +66,28 @@ class Clients(db.Model):
 class Orcaments(db.Model):
     _tablename__ = "orcaments"
     id = db.Column(db.Integer, primary_key=True)
-    pedido_id = db.Column(db.Integer, autoincrement=True)
-    client_id = db.Column(db.Integer, db.ForeignKey('clients.id'), nullable=False)
+    client = db.Column(db.String)
+    date = db.Column(DateTime, default=datetime.datetime.utcnow)
+    pedido = db.Column(db.String)
+    valor = db.Column(db.Integer)
+    desconto = db.Column(db.Integer)
+
+    forma_pagto = db.Column(db.String)
+    valor_total = db.Column(db.Integer)
+
     
     
-    def __init__(self, pedido_id, client_id):
-        self.pedido_id = pedido_id
-        self.client_id = client_id
+    def __init__(self, client, date, pedido, valor, desconto, forma_pagto, valor_total):
+        self.client =client
+        self.date = date
+        self.pedido = pedido
+        self.valor = valor
+        self.desconto = desconto
+        self.forma_pagto = forma_pagto
+        self.valor_total = valor_total
+        
         
     def __repr__(self):
-        return "<Orcaments %r>" % self.client_id
+        return "<Orcaments %r>" % self.client
 
 

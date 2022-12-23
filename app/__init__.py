@@ -8,13 +8,16 @@ from flask_login import LoginManager
 app = Flask(__name__)
 
 app.config.from_object('config')
+
+lm = LoginManager()
+lm.init_app(app)
+
 db = SQLAlchemy(app)
 migrate = Migrate(app, db, render_as_batch=True)
 
 manager = Manager(app)
 
-lm = LoginManager()
-lm.init_app(app)
+
 
 
 
