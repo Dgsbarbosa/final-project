@@ -12,12 +12,11 @@
 
     <form action="/folha_orcamentos" method="POST">
 
-        <div class=" row" style="margin-top: 20px; margin-bottom: 0px">
-        </div>
+
 
         <div class="row">
             <div class="col">
-
+                <label for="">Cliente</label>
                 <input class="form-control" list="clients" name="client" id="client" placeholder="Cliente">
                 <datalist id="clients">
 
@@ -28,18 +27,14 @@
                 </datalist>
             </div>
 
-            <div class="col">
-
-                <input class="form-control" id="date" name="date" type="date">
-            </div>
-
+           
         </div>
 
 
         <div class="row">
 
             <div class="col" class="form-control">
-                <label for=""></label>
+                <label for="">Pedido</label>
                 <textarea class="form-control" placeholder="Descreva o serviço" id="pedido" name="pedido"
                     rows="3"></textarea>
 
@@ -52,23 +47,40 @@
 
         <div class="row" style="margin-top: 20px;">
             <div class="col">
-
-                <input class="form-control" type="Text" size="12" onKeyUp="mascaraMoeda(this, event)" value=""
-                    name="valor" id="valor" placeholder="Valor">
+                <label for="">Valor</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">R$</span>
+                    </div>
+                    <input class="form-control" type="Text" size="12" value="" name="valor" oninput="myFunction()" id="valor"
+                        placeholder="Valor">
+                    <div class="input-group-append">
+                        <span class="input-group-text">.00</span>
+                    </div>
+                </div>
             </div>
 
-            <div class="col">
-                <input class="form-control"  type="Text" size="12" onKeyUp="mascaraMoeda(this, event)" value="" name="desconto"
-                    id="desconto" placeholder="Desconto">
+            <div class="col ">
+                <label for="">Desconto</label>
 
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">R$</span>
+                    </div>
+                    <input class="form-control" type="Text" size="12" value="" name="desconto" oninput="myFunction()" id="desconto"
+                        placeholder="Desconto">
+                    <div class="input-group-append">
+                        <span class="input-group-text">.00</span>
+                    </div>
+                </div>
             </div>
 
         </div>
 
         <div class="row" style="margin-top: 20px;">
             <div class="col">
-
-                <input class="form-control"  list="pagtos" name="pagto" id="pagto" placeholder="Forma de pagamento" >
+                <label for="">Forma de Pagamento</label>
+                <input class="form-control" list="pagtos" name="pagto" id="pagto" placeholder="Forma de pagamento">
                 <datalist id="pagtos" name="pagtos">
 
                     <option value="A vista">
@@ -80,7 +92,17 @@
             </div>
 
             <div class="col">
-                <h1 id="total" name="total"> </h1>
+                <label for="">Total</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">R$</span>
+                    </div>
+                    <input class="form-control" type="Text" size="12" value="" name="total"  id="total"
+                        placeholder="Total">
+                    <div class="input-group-append">
+                        <span class="input-group-text">.00</span>
+                    </div>
+                </div>
             </div>
 
 
@@ -101,29 +123,21 @@
 </div>
 
 <script>
-    String.prototype.reverse = function () {
-        return this.split('').reverse().join('');
-    };
+    
 
-    function mascaraMoeda(campo, evento) {
-        var tecla = (!evento) ? window.event.keyCode : evento.which;
-        var valor = campo.value.replace(/[^\d]+/gi, '').reverse();
-        var resultado = "";
-        var mascara = "##.###.###,##".reverse();
-        for (var x = 0, y = 0; x < mascara.length && y < valor.length;) {
-            if (mascara.charAt(x) != '#') {
-                resultado += mascara.charAt(x);
-                x++;
-            } else {
-                resultado += valor.charAt(y);
-                y++;
-                x++;
-            }
-        }
-        campo.value = resultado.reverse();
+    function myFunction() {
+        var valor = document.getElementById("valor").value;
+        var desconto = document.getElementById("desconto").value;       
+        var total = valor - desconto;
+        
+        var input = document.getElementById("total");
+        input.value = total
+
+        
+
+
     }
-
-   
+    
 </script>
 
 {% endblock %}

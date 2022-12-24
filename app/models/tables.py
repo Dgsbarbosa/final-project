@@ -5,6 +5,7 @@ import datetime
 
 
 
+
 class User(db.Model):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -16,14 +17,18 @@ class User(db.Model):
 
     @property
     def is_authenticated(self):
+        
+        
         return True
 
     @property
     def is_active(self):
+        
         return True
 
     @property
     def is_anonymous(self):
+        
         return False
 
     def get_id(self):
@@ -65,9 +70,8 @@ class Clients(db.Model):
 
 class Orcaments(db.Model):
     _tablename__ = "orcaments"
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)    
     client = db.Column(db.String)
-    date = db.Column(DateTime, default=datetime.datetime.utcnow)
     pedido = db.Column(db.String)
     valor = db.Column(db.Integer)
     desconto = db.Column(db.Integer)
@@ -77,10 +81,9 @@ class Orcaments(db.Model):
 
     
     
-    def __init__(self, client, date, pedido, valor, desconto, forma_pagto, valor_total):
-        self.client =client
-        self.date = date
-        self.pedido = pedido
+    def __init__(self, client,pedido, valor, desconto, forma_pagto, valor_total):
+        self.client =client        
+        self.pedido = pedido        
         self.valor = valor
         self.desconto = desconto
         self.forma_pagto = forma_pagto

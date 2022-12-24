@@ -1,30 +1,34 @@
 
-from flask import render_template, flash, redirect, url_for, request
+from flask import render_template, flash, redirect, url_for, request, session
 
 from flask import render_template, flash, redirect, url_for
 
-from flask_login import login_user, logout_user
+from flask_login import login_user, logout_user, current_user
 from app import app, db, lm
 
 from app.models.tables import User, Clients, Orcaments
 from app.models.forms import LoginForm
+from flask_session import Session
+
+
 
 
 @lm.user_loader
 def load_user(id):
+    
     return User.query.filter_by(id=id).first()
-
 
 # Rotas
 @app.route("/index")
 @app.route("/")
 def index():
-
+    if not session.get("username"):
+        return redirect("/login")
     return render_template(
         "index.html",
         title="Home")
 
-#Increver-se
+# Increver-se
 @app.route("/cadastro_user",  methods=['GET', 'POST'])
 def cadastro_user():
 
@@ -33,8 +37,8 @@ def cadastro_user():
             name=request.form['nome'],
             password=request.form['password'],
             username=request.form['username'],
-            email=request.form['email']        
-               
+            email=request.form['email']
+
 
         )
         db.session.add(user)
@@ -45,7 +49,29 @@ def cadastro_user():
         "cadastroUser.html",
         title="Cadastro de Cliente")
 
-#Routes login
+# Edit user
+@app.route('/edit_user', methods=['GET', 'POST'])
+def edit_user():
+
+    
+    user = User.query.all()
+    print(user.id)
+    print(user.name )
+    if request.method == 'POST':
+
+        user.name = request.form['name']
+        user.password = request.form['password']       
+        user.username = request.form['username']
+        user.email = request.form['email']        
+        
+
+        db.session.commit()
+        return redirect(url_for("index"))
+
+    return render_template("perfil.html", user=user,
+                           title="Editar Usuário")
+
+# Routes login
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
@@ -53,6 +79,8 @@ def login():
         user = User.query.filter_by(username=form.username.data).first()
         if user and user.password == form.password.data:
             login_user(user)
+            session["username"] = request.form.get("username")
+            
             return redirect(url_for("index"))
         else:
             flash("Invalid login")
@@ -67,6 +95,7 @@ def perfil():
     return render_template(
         "perfil.html",
         title="Meu Perfil")
+
 
 # Route Business
 @app.route("/negocio")
@@ -101,43 +130,22 @@ def view_orcaments(id):
 # create orcaments
 @app.route("/folha_orcamentos", methods=['GET', 'POST'])
 def folha_orcamentos():
-    
+
     clients = Clients.query.all()
-    print(clients)
-    for i in clients:
-        print(i.id)
-        print(i.name)
-        print(i.email)
-        print(i.address)
+
     
-    print("--------------")
 
-    name = ['browser']
-    print(name)
-
-    print("--------------")
-
-    orcamentos = Orcaments.query.all()
-    print(orcamentos)
-    for i in orcamentos:
-        print(i.id)
-        print(i.client)
-        print(i.date)
-        print(i.date)
-        print(i.pedido)
-   
-    
     if request.method == 'POST':
-        
+
         pedido = Orcaments(
-            client=request.form['client'],              
-            pedido=request.form['pedido'],
+
+            client=request.form['client'],
+            pedido=request.form['pedido'],            
             valor=request.form['valor'],
-            date=request.form['date'],            
             desconto=request.form['desconto'],
             forma_pagto=request.form['pagto'],
             valor_total=request.form['total']
-               
+
 
         )
         print(pedido)
@@ -151,7 +159,35 @@ def folha_orcamentos():
         title="Criar Orçamento", clients=clients)
 
 
+# View orcament
+@app.route('/viewOrcament/<int:id>', methods=['GET'])
+def view_orcament(id):
+    orcament = Orcaments.query.filter_by(id=id).first_or_404()
+    
+    return render_template('viewOrcament.html', orcament=orcament)
+
+# Edit Orcament
+@app.route('/edit_orcament/<int:id>', methods=['GET', 'POST'])
+def edit_orcament(id):
+    orcament = Orcaments.query.get(id)
+    if request.method == 'POST':
+
+        orcament.client = request.form['client']
+        orcament.pedido = request.form['pedido']       
+        orcament.valor = request.form['valor']
+        orcament.desconto = request.form['desconto']
+        orcament.forma_pagto = request.form['pagto']
+        orcament.valor_total = request.form['total']
+
+        db.session.commit()
+        return redirect(url_for("orcamentos"))
+
+    return render_template("editOrcamento.html", orcament=orcament,
+                           title="Editar Orcamento")
+
 # Delete orcaments
+
+
 @app.route("/delet_orcaments/<int:id>")
 def delet_orcaments(id):
     orcament = Orcaments.query.get(id)
@@ -166,7 +202,7 @@ def delet_orcaments(id):
 def clients():
 
     clients = Clients.query.all()
-
+    
     return render_template(
         "clients.html",
         title="Clientes", clients=clients)
@@ -233,5 +269,6 @@ def delete(id):
 # Logout
 @app.route("/logout")
 def logout():
+    session["username"] = None
     logout_user()
     return redirect(url_for("index"))

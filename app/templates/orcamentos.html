@@ -37,24 +37,26 @@
 </div>
 
 <div>
-  <table class="table" id="myTable">
+  <table class="table" id="myTable" style="text-align: center;">
     <caption>Tabela de Orçamentos</caption>
     <thead class="thead-dark">
       <tr>
         <th scope="col">ID</th>
         <th scope="col">Cliente</th>
-        <th scope="col">Pedido</th>
+        <th scope="col">Total</th>
+        <th scope="col">Forma de Pagamento</th>        
         <th scope="col">Ações</th>    
         
       </tr>
 
     </thead>
-    <tbody id="body">
-      <tr>
+    <tbody id="body" >
+      <tr >
         {% for o in orcaments %}
         <th scope="row">{{ o.id }}</th>
-        <td> {{o.client_id }}</td>
-        <td>{{ o.pedido_id }}</td>
+        <td> {{o.client }}</td>
+        <td>R$ {{ o.valor_total }},00</td>
+        <td s>{{ o.forma_pagto }}</td>
         
         
 
@@ -63,7 +65,7 @@
             <input type="button" class="btn btn-primary btn-sm" value="ver">
           </a>
 
-          <a href="/edit/{{ o.id }}">
+          <a href="/edit_orcament/{{ o.id }}">
             <input type="button" class="btn btn-primary btn-sm" value="editar">
           </a>
           <a href="/delet_orcaments/{{ o.id }}">
