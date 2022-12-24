@@ -5,10 +5,10 @@ from flask_login import login_user, logout_user, current_user
 from app import app, db, lm
 from flask_mail import Mail, Message
 from app.models.tables import User, Clients, Orcaments
-from app.models.forms import LoginForm, ContactForm
+from app.models.forms import LoginForm
 from flask_session import Session
 from flask_wtf.csrf import CSRFProtect
-from app import mail
+
 
 @lm.user_loader
 def load_user(id):
@@ -49,23 +49,25 @@ def cadastro_user():
 # Edit user
 @app.route('/edit_user', methods=['GET', 'POST'])
 def edit_user():
+    if current_user.is_authenticated:
+        id_user = current_user
 
-    id_user = current_user
+        user = User.query.get(id_user.id)
+        print(user.name)
+        if request.method == 'POST':
 
-    user = User.query.get(id_user.id)
-    print(user.name)
-    if request.method == 'POST':
+            user.name = request.form['nome']
+            user.password = request.form['password']       
+            user.username = request.form['username']
+            user.email = request.form['email']        
+            
 
-        user.name = request.form['nome']
-        user.password = request.form['password']       
-        user.username = request.form['username']
-        user.email = request.form['email']        
-        
+            db.session.commit()
+            flash("Usuário alterado")
+            return redirect(url_for("edit_user"))
 
-        db.session.commit()
-        flash("Usuário alterado")
-        return redirect(url_for("edit_user"))
-
+    else:
+        return redirect(url_for("login"))
     return render_template("perfil.html", user=user,
                            title="Editar Usuário")
 

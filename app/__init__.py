@@ -10,15 +10,7 @@ from app.models.forms import ContactForm
 
 app = Flask(__name__)
 
-mail= Mail(app)
 
-app.config['MAIL_SERVER']='smtp.gmail.com'
-app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = 'dg.developer.1988@gmail.com'
-app.config['MAIL_PASSWORD'] = 'Dod@1988'
-app.config['MAIL_USE_TLS'] = False
-app.config['MAIL_USE_SSL'] = True
-mail = Mail(app)
 
 app.config.from_object('config')
 app.config["SESSION_PERMANENT"]=False
