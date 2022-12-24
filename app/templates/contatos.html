@@ -6,14 +6,14 @@
     <h2 style="margin-left: 15px;padding: 10px">Formulário de Contato</h2>
 
 
-    <form action="/contatos" method="POST">
+    <form action="mailto:dg.developer@gmail.com"  method="POST" enctype="text/plain">
+        
 
-
-
-        <div class="row">
+       
+        <div class="row ">
             <div class="col">
                 <label for="">Nome</label>
-                <input class="form-control" type="text" name="nome" id="nome" placeholder="Cliente">
+                <input class="form-control" type="text" name="name" id="name" placeholder="Cliente">
 
             </div>
 
@@ -24,7 +24,7 @@
 
             <div class="col" class="form-control">
                 <label for="">Email</label>
-                <input class="form-control" type="email" name="email" id="email" placeholder="Email">
+                <input class="form-control" type="email" name="email" id="email" placeholder="Seu email">
             </div>
 
         </div>
@@ -33,7 +33,7 @@
 
             <div class="col" class="form-control">
                 <label for="">Assunto</label>
-                <input class="form-control" type="text" name="subject" id="subject" placeholder="Email">
+                <input class="form-control" type="text" name="assunto" id="assunto" placeholder="Assunto">
             </div>
 
         </div>
@@ -43,7 +43,7 @@
 
             <div class="col" class="form-control">
                 <label for="">Descrição</label>
-                <textarea class="form-control" placeholder="Descreva a solicitação" id="message" name="message"
+                <textarea n class="form-control" placeholder="Descreva a solicitação" id="mensagem" name="mensagen"
                     rows="3"></textarea>
 
             </div>

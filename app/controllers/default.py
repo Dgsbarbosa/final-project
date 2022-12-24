@@ -1,17 +1,14 @@
 
 from flask import render_template, flash, redirect, url_for, request, session
-
 from flask import render_template, flash, redirect, url_for
-
 from flask_login import login_user, logout_user, current_user
 from app import app, db, lm
-
+from flask_mail import Mail, Message
 from app.models.tables import User, Clients, Orcaments
-from app.models.forms import LoginForm, ContactForm,csrf
+from app.models.forms import LoginForm, ContactForm
 from flask_session import Session
-
-
-
+from flask_wtf.csrf import CSRFProtect
+from app import mail
 
 @lm.user_loader
 def load_user(id):
@@ -270,18 +267,11 @@ def delete(id):
 #contatos
 @app.route("/contato", methods=['POST', 'GET'])
 def contato():
-    form = ContactForm()
-    if form.validate_on_submit():        
-        print('-------------------------')
-        print(request.form['nome'])
-        print(request.form['email'])
-        print(request.form['subject'])    
-        print(request.form['message'])       
-        print('-------------------------')
-        send_message(request.form)
-        return redirect("/index")
 
-    return render_template("contatos.html")
+   
+    
+
+    return render_template("contatos.html" )
 
 # Logout
 @app.route("/logout")
