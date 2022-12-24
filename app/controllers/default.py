@@ -7,7 +7,7 @@ from flask_login import login_user, logout_user, current_user
 from app import app, db, lm
 
 from app.models.tables import User, Clients, Orcaments
-from app.models.forms import LoginForm
+from app.models.forms import LoginForm, ContactForm,csrf
 from flask_session import Session
 
 
@@ -53,20 +53,21 @@ def cadastro_user():
 @app.route('/edit_user', methods=['GET', 'POST'])
 def edit_user():
 
-    
-    user = User.query.all()
-    print(user.id)
-    print(user.name )
+    id_user = current_user
+
+    user = User.query.get(id_user.id)
+    print(user.name)
     if request.method == 'POST':
 
-        user.name = request.form['name']
+        user.name = request.form['nome']
         user.password = request.form['password']       
         user.username = request.form['username']
         user.email = request.form['email']        
         
 
         db.session.commit()
-        return redirect(url_for("index"))
+        flash("Usuário alterado")
+        return redirect(url_for("edit_user"))
 
     return render_template("perfil.html", user=user,
                            title="Editar Usuário")
@@ -265,6 +266,22 @@ def delete(id):
     db.session.commit()
     return redirect(url_for("clients"))
 
+
+#contatos
+@app.route("/contato", methods=['POST', 'GET'])
+def contato():
+    form = ContactForm()
+    if form.validate_on_submit():        
+        print('-------------------------')
+        print(request.form['nome'])
+        print(request.form['email'])
+        print(request.form['subject'])    
+        print(request.form['message'])       
+        print('-------------------------')
+        send_message(request.form)
+        return redirect("/index")
+
+    return render_template("contatos.html")
 
 # Logout
 @app.route("/logout")
